@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Cartoon Profile</title>
+    <style>
+        /* কার্টুন থিমের বেসিক স্টাইল */
+        body {
+            background-color: #ffde59; /* উজ্জ্বল হলুদ */
+            font-family: 'Comic Sans MS', 'Chalkboard SE', sans-serif; /* কার্টুন ফন্ট */
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        /* মূল কার্ডের ডিজাইন */
+        .card {
+            background-color: #ffffff;
+            border: 5px solid #000000;
+            border-radius: 20px;
+            box-shadow: 10px 10px 0px #000000; /* থিক শ্যাডো */
+            padding: 40px 30px;
+            max-width: 450px;
+            width: 100%;
+            text-align: center;
+        }
+
+        /* প্রোফাইল ছবি বা ইমোজি */
+        .avatar {
+            width: 100px;
+            height: 100px;
+            background-color: #ff914d;
+            border: 4px solid #000;
+            border-radius: 50%;
+            margin: 0 auto 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 3rem;
+            box-shadow: 6px 6px 0px #000;
+        }
+
+        /* নামের ডিজাইন */
+        h1 {
+            font-size: 2.5rem;
+            margin: 0 0 25px 0;
+            color: #ff5757;
+            text-shadow: 3px 3px 0px #000;
+            -webkit-text-stroke: 1.5px black;
+        }
+
+        /* ইনফরমেশন বক্স */
+        .info-box {
+            background-color: #38b6ff;
+            border: 3px solid #000;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            padding: 12px 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 5px 5px 0px #000;
+            color: #ffffff;
+            font-weight: bold;
+            font-size: 1.1rem;
+            text-shadow: 1px 1px 0px #000;
+        }
+
+        /* বিভিন্ন বক্সের কালার */
+        .box-phone { background-color: #38b6ff; }
+        .box-email { background-color: #ff66c4; }
+        .box-address { background-color: #ff914d; }
+        .box-asset { background-color: #cb6ce6; }
+
+        .info-text {
+            text-align: left;
+            flex-grow: 1;
+            margin-right: 15px;
+            word-break: break-word;
+        }
+
+        /* কপি বাটন */
+        .copy-btn {
+            background-color: #7ed957;
+            border: 3px solid #000;
+            border-radius: 8px;
+            padding: 8px 15px;
+            font-family: inherit;
+            font-weight: bold;
+            font-size: 1rem;
+            color: #000;
+            cursor: pointer;
+            box-shadow: 4px 4px 0px #000;
+            transition: transform 0.1s, box-shadow 0.1s;
+        }
+
+        /* বাটনে ক্লিক করার অ্যানিমেশন */
+        .copy-btn:active {
+            transform: translate(4px, 4px);
+            box-shadow: 0px 0px 0px #000;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="card">
+        <div class="avatar">🦸‍♂️</div>
+        <h1>My Profile</h1>
+
+        <!-- Phone Number -->
+        <div class="info-box box-phone">
+            <span class="info-text" id="phone">+880 1712-345678</span>
+            <button class="copy-btn" onclick="copyText('phone', this)">Copy</button>
+        </div>
+
+        <!-- Email Address -->
+        <div class="info-box box-email">
+            <span class="info-text" id="email">your.email@example.com</span>
+            <button class="copy-btn" onclick="copyText('email', this)">Copy</button>
+        </div>
+
+        <!-- Address -->
+        <div class="info-box box-address">
+            <span class="info-text" id="address">Dhaka, Bangladesh</span>
+            <button class="copy-btn" onclick="copyText('address', this)">Copy</button>
+        </div>
+
+        <!-- Important Asset / Link -->
+        <div class="info-box box-asset">
+            <span class="info-text" id="asset">github.com/yourusername</span>
+            <button class="copy-btn" onclick="copyText('asset', this)">Copy</button>
+        </div>
+    </div>
+
+    <!-- কপি ফাংশনের জাভাস্ক্রিপ্ট -->
+    <script>
+        function copyText(elementId, btnElement) {
+            // আইডি থেকে টেক্সট খুঁজে বের করা
+            var textToCopy = document.getElementById(elementId).innerText;
+            
+            // ক্লিপবোর্ডে কপি করা
+            navigator.clipboard.writeText(textToCopy).then(function() {
+                // কপি হওয়ার পর বাটনের লেখা চেঞ্জ করা
+                var originalText = btnElement.innerText;
+                btnElement.innerText = "Copied!";
+                btnElement.style.backgroundColor = "#ffe600";
+                
+                // ২ সেকেন্ড পর আবার আগের অবস্থায় ফিরিয়ে আনা
+                setTimeout(function() {
+                    btnElement.innerText = originalText;
+                    btnElement.style.backgroundColor = "#7ed957";
+                }, 2000);
+            }).catch(function(err) {
+                console.error('Failed to copy: ', err);
+                alert("Copy failed!");
+            });
+        }
+    </script>
+
+</body>
+</html>
